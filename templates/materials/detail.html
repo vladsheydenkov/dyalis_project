@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}{{ material.title }}{% endblock %}
+
+{% block content %}
+    <a href="{% url "main_app:all_materials" %}">All materials</a>
+    <h1>My Materials</h1>
+    <h2>{{ material.title }}</h2>
+    <p>{{ material.body }}</p>
+    Author {{ material.author }} published {{ material.publish }}<br>
+{% endblock %}

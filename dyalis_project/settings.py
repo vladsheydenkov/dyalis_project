@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main_app'
 ]
 
 MIDDLEWARE = [
@@ -88,7 +89,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 try:
     from .local_settings import *

@@ -10,4 +10,5 @@
         <a href="{{ material.get_absolute_url }}">link</a>
         Author {{ material.author }}
     {% endfor %}
+    <p><a href="{% url "main_app:create_form" %}">Create new material</a></p>
 {% endblock %}

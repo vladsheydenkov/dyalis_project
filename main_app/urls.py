@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:year>/<int:month>/<int:day>/<slug:slug>',
          views.material_details, name='material_details',
          ),
+    path('create/', views.create_form, name='create_form')
 ]

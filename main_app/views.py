@@ -33,8 +33,8 @@ def create_form(request):
         if material_form.is_valid():
             new_material = material_form.save(commit=False)
             new_material.author = User.objects.first()
-            slug = translit(new_material.title, 'ru', reversed=True)
-            new_material.slug = slug.replace(' ', '-')
+            translit_slug = translit(new_material.title, 'ru', reversed=True)
+            new_material.slug = translit_slug.replace(' ', '-')
             new_material.save()
             created = True
             return render(request,
@@ -45,3 +45,40 @@ def create_form(request):
         return render(request,
                       'materials/create.html',
                       {'created': created, 'form': material_form})
+
+
+def share_material(request, material_id):
+    material = get_object_or_404(models.Material,
+                                 id=material_id)
+
+    sent = False
+
+    if request.method == 'POST':
+        form = forms.EmailMaterialForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            material_uri = request.build_absolute_uri(
+                material.get_absolute_url()
+            )
+            subject = '{} recommends you to review next material {}'.format(
+                cd['name'],
+                material.title,
+            )
+            body = ('{title} at {url} \n\n {name} asks you to review it.'
+                    'Comment: \n\n {comment}').format(
+                title=material.title,
+                url=material_uri,
+                name=cd['name'],
+                comment=cd['comment'],
+            )
+
+            send_mail(subject,
+                      body,
+                      'supersiteadmin@mysite.com',
+                      [cd['to_email'], ])
+    else:
+        form = forms.EmailMaterialForm()
+
+    return render(request,
+                  'materials/share.html',
+                  {'material': material, 'form': form, 'sent': sent})

@@ -8,4 +8,7 @@
     <h2>{{ material.title }}</h2>
     <p>{{ material.body }}</p>
     Author {{ material.author }} published {{ material.publish }}<br>
+     <p>
+        <a href="{% url "main_app:share_material" material.id %}">Share material</a>
+    </p>
 {% endblock %}

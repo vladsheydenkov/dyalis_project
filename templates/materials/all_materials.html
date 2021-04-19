@@ -3,6 +3,8 @@
 {% block title %}Material list{% endblock %}
 
 {% block content %}
+    <a href="{% url "main_app:login" %}">Login</a>
+
     <h1>My Materials</h1>
     {% for material in materials %}
         <h2>{{ material.title }}</h2>

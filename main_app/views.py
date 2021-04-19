@@ -1,13 +1,18 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
+
+from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from . import models
 from . import forms
 from transliterate import translit
 
+
 # Create your views here.
 
-
+@login_required
 def all_materials(request):
     materials = models.Material.objects.all()
     return render(request,
@@ -15,6 +20,7 @@ def all_materials(request):
                   {"materials": materials})
 
 
+@login_required
 def material_details(request, year, month, day, slug):
     material = get_object_or_404(models.Material,
                                  slug=slug,
@@ -52,7 +58,6 @@ def share_material(request, material_id):
                                  id=material_id)
 
     sent = False
-
     if request.method == 'POST':
         form = forms.EmailMaterialForm(request.POST)
         if form.is_valid():

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Logged out{% endblock %}
+{% block content %}
+    <h1>User logout</h1>
+    You've been logged out, you can login again:
+    <a href="{% url "main_app:login" %}">login</a>
+
+{#    {% if form.errors %}#}
+{#        BAD CREDENTIALS#}
+{#    {% endif %}#}
+{#    <form action="." method="post">#}
+{#        {{ form.as_p }}#}
+{#        {% csrf_token %}#}
+{#        <input type="hidden" name="next" value="{{ next }}">#}
+{#        <input type="submit" value="Login">#}
+{#    </form>#}
+{% endblock %}

@@ -4,9 +4,11 @@
 
 {% block content %}
     {% if created %}
-        {{ material.title }} has been created.
-        <p><a href="{{ material.get_absolute_url }}">view details</a></p>
+        <span style="color: red">{{ material.title }}</span> has been created.
+        <p><a href="{{ material.get_absolute_url }}">View details</a></p>
+        <a href="{% url "main_app:all_materials" %}">All materials</a>
     {% else %}
+        <p><a href="{% url "main_app:all_materials" %}">Back too All materials</a></p>
         <p>Create new material</p>
         <form action="." method="post">
             {{ form.as_p }}

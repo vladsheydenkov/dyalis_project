@@ -21,13 +21,13 @@ DEBUG = True
 ALLOWED_HOSTS = ['159.65.201.110', '127.0.0.1']
 
 INSTALLED_APPS = [
+    'main_app.apps.MainAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main_app'
 ]
 
 MIDDLEWARE = [
@@ -91,7 +91,9 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+LOGIN_URL = 'login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = 'logout/'
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 try:

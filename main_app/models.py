@@ -20,7 +20,7 @@ class Material(models.Model):
 
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,  # удалятся все материалы автора
-                               related_name='user_materials')  # у юзера создаст имя user materials по которому будут доступны все материалы у которых этот пользователь автор)
+                               related_name='user_materials')  # у юзера создаст имя user materials по которому будут доступны(queryset) все материалы у которых этот пользователь автор)
 
     material_type = models.CharField(
         max_length=25,
@@ -39,3 +39,12 @@ class Material(models.Model):
                              self.publish.day,
                              self.slug])
 
+
+class Comment(models.Model):
+    material = models.ForeignKey(Material,
+                                 on_delete=models.CASCADE,
+                                 related_name='comments')
+    name = models.CharField(max_length=80)
+    body = models.TextField()
+    created = models.DateTimeField(auto_now=True)
+    email = models.EmailField()

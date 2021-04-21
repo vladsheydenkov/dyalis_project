@@ -12,3 +12,8 @@ class MaterialAdmin(admin.ModelAdmin):
     search_fields = ('title', 'body')
     prepopulated_fields = {'slug': ('title', )}
     ordering = ('material_type', 'publish')
+
+
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('material', 'name', 'created', 'email')

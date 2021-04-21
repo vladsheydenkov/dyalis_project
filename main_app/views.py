@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
 from django.core.mail import send_mail
 
 from django.http import HttpResponse
@@ -27,9 +28,19 @@ def material_details(request, year, month, day, slug):
                                  publish__year=year,
                                  publish__month=month,
                                  publish__day=day, )
+    if request.method == 'POST':
+        comment_form = forms.CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.material = material
+            new_comment.save()
+            return redirect(material)
+    else:
+        comment_form = forms.CommentForm()
     return render(request,
                   'materials/detail.html',
-                  {'material': material})
+                  {'material': material,
+                   'form': comment_form})
 
 
 def create_form(request):

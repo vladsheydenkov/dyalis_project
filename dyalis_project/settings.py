@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['159.65.201.110', '127.0.0.1']
+ALLOWED_HOSTS = ['159.65.201.110', '127.0.0.1', 'dialysis.space']
 
 INSTALLED_APPS = [
     'main_app.apps.MainAppConfig',

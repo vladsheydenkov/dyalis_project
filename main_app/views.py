@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from . import models
 from . import forms
 from transliterate import translit
-
+import string
 
 # Create your views here.
 
@@ -40,7 +40,8 @@ def create_form(request):
             new_material = material_form.save(commit=False)
             new_material.author = User.objects.first()
             translit_slug = translit(new_material.title, 'ru', reversed=True)
-            new_material.slug = translit_slug.replace(' ', '-')
+            str_without_sym = ''.join([sym for sym in translit_slug if sym not in string.punctuation])
+            new_material.slug = str_without_sym.replace(' ', '-')
             new_material.save()
             created = True
             return render(request,

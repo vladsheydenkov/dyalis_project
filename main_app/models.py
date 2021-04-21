@@ -38,3 +38,4 @@ class Material(models.Model):
                              self.publish.month,
                              self.publish.day,
                              self.slug])
+
